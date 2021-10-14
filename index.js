@@ -29,6 +29,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(5000, () => {
+const PORT = processenv.PORT || 5000;
+
+app.listen(PORT, () => {
   console.log("Running on port 5000");
 });
