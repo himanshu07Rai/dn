@@ -8,26 +8,11 @@ const validInfo = require("../middleware/validInfo");
 const authorisation = require("../middleware/authorisation");
 const prisma = require("../prisma/client");
 
-router.get("/", authorisation, async (req, res, next) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        user_id: req.user,
-      },
-      select: {
-        user_id: true,
-        user_name: true,
-        user_email: true,
-      },
-    });
-
-    res.json(user);
-  } catch (err) {
-    next(createError(500, "Sever Error"));
-  }
+router.get("/", async (req, res) => {
+  res.send("🚀 Server running 🚀");
 });
 
-router.post("/register", validInfo, async (req, res, next) => {
+router.post("/signup", validInfo, async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
@@ -38,7 +23,7 @@ router.post("/register", validInfo, async (req, res, next) => {
     });
 
     if (user) {
-      next(createError("This user already exists ! Try logging in"));
+      next(createError("This user already exists ! Try to login"));
     }
 
     const salt = await bcrypt.genSalt(10);
