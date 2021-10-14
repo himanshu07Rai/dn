@@ -29,6 +29,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log("Running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+console.log(process.env.DATABASE_URL);
+
+app.listen(PORT, () => {
+  console.log(`🚀 Running on port ${PORT} 🚀`);
 });

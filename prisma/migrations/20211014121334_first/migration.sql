@@ -17,5 +17,8 @@ CREATE TABLE "Todo" (
     CONSTRAINT "Todo_pkey" PRIMARY KEY ("todo_id")
 );
 
+-- CreateIndex
+CREATE UNIQUE INDEX "User_user_email_key" ON "User"("user_email");
+
 -- AddForeignKey
 ALTER TABLE "Todo" ADD CONSTRAINT "Todo_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
