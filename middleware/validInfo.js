@@ -9,19 +9,17 @@ module.exports = (req, res, next) => {
 
   if (req.path === "/register") {
     if (![email, name, password].every(Boolean)) {
-      return next(createError(400, "Missing Credentials"));
+      next(createError(400, "Missing Credentials"));
     } else if (!validEmail(email)) {
-      return next(createError(400, "Invalid Email"));
+      next(createError(400, "Invalid Email"));
     } else if (password.length < 6) {
-      return next(
-        createError(400, "Password should atleast have 6 characters")
-      );
+      next(createError(400, "Password should atleast have 6 characters"));
     }
   } else if (req.path === "/login") {
     if (![email, password].every(Boolean)) {
-      return res.status(401).json("Missing Credentials");
+      next(createError(400, "Missing Credentials"));
     } else if (!validEmail(email)) {
-      return res.status(401).json("Invalid Email");
+      next(createError(400, "Invalid Email"));
     }
   }
 
